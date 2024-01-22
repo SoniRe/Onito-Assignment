@@ -1,15 +1,15 @@
 export const options1 = [
   {
     label: "Male",
-    value: "m",
+    value: "M",
   },
   {
     label: "Female",
-    value: "f",
+    value: "F",
   },
   {
     label: "Other",
-    value: "o",
+    value: "O",
   },
 ];
 
@@ -24,3 +24,5 @@ export const options2 = [
     value: "PAN",
   },
 ];
+
+export const COUNTRY_URL = "https://restcountries.com/v3.1/name/";

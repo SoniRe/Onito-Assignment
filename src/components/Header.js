@@ -3,7 +3,7 @@ import companyLogo from "./../assets/onito-logo.png";
 import { Box, Typography } from "@mui/material";
 
 const Header = () => {
-  const isForm1Filled = useSelector((store) => store.users.isForm1Filled);
+  const form1 = useSelector((store) => store.users.form1);
 
   return (
     <>
@@ -14,7 +14,9 @@ const Header = () => {
         alt="company logo"
       />
       <Typography sx={{ textDecoration: "underline", mt: "4vw" }} variant="h5">
-        {isForm1Filled === false ? "Personal Details" : "Address Details"}
+        {Object.keys(form1).length === 0
+          ? "Personal Details"
+          : "Address Details"}
       </Typography>
     </>
   );

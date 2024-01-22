@@ -1,15 +1,19 @@
-import { Button, Stack, Box, InputLabel, Typography } from "@mui/material";
+import { Button, Stack, Box, InputLabel } from "@mui/material";
 import { useForm } from "react-hook-form";
 import FormInputText from "./FormInputText";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/usersSlice";
-import { useEffect, useState } from "react";
+import { addUser, clearFields } from "../utils/usersSlice";
+import { useState } from "react";
+import FormAutoComplete from "./FormAutoComplete";
+import useCountryName from "../hooks/useCountryName";
 
 const AddressDetailsForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [countries, setCountries] = useState([]);
+
+  useCountryName(setCountries);
 
   const defaultFormValues = {
     address: "",
@@ -19,39 +23,14 @@ const AddressDetailsForm = () => {
     pincode: "",
   };
 
-  const { handleSubmit, reset, control, watch } = useForm({
+  const { handleSubmit, reset, control } = useForm({
     defaultValues: defaultFormValues,
   });
 
-  const countryValue = watch("country");
-
-  useEffect(() => {
-    const i = setTimeout(() => getCountryData(), 200);
-
-    return () => {
-      clearTimeout(i);
-    };
-  }, [countryValue]);
-
-  const getCountryData = async () => {
-    try {
-      const data = await fetch(
-        "https://restcountries.com/v3.1/name/" + countryValue
-      );
-      const json = await data.json();
-
-      const finalOutput = json?.map((obj) => obj.name.common);
-      setCountries(finalOutput);
-      console.log(finalOutput);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(addUser(data));
     reset();
+    dispatch(clearFields());
     alert("User Data Added to the Database");
   };
 
@@ -121,7 +100,7 @@ const AddressDetailsForm = () => {
               Country
             </InputLabel>
 
-            <FormInputText
+            <FormAutoComplete
               name="country"
               control={control}
               label="Enter Country Name"

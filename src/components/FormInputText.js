@@ -8,18 +8,14 @@ const FormInputText = ({ name, control, label }) => {
     <Controller
       name={name}
       control={control}
-      render={({
-        field: { onChange, value },
-        fieldState: { error },
-        formState,
-      }) => (
+      render={({ field: { onChange, value }, fieldState: { error } }) => (
         <TextField
           helperText={error ? error.message : null}
           error={!!error}
           size="small"
           sx={{ width: variableWidth }}
           label={label}
-          value={value}
+          value={value ? value : ""}
           type="text"
           onChange={onChange}
         />

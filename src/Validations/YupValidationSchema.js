@@ -15,7 +15,7 @@ const YupValidationSchema = yup.object().shape({
   sex: yup
     .string()
     .required("Sex is a Required field")
-    .oneOf(["m", "f", "o"], "Sex must be either Male, Female or Other"),
+    .oneOf(["M", "F", "O"], "Sex must be either Male, Female or Other"),
 
   mobile: yup
     .string()

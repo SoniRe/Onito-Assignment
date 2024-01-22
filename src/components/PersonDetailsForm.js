@@ -16,7 +16,7 @@ const PersonDetailsForm = () => {
   const defaultFormValues = {
     name: "",
     mobile: "",
-    age: "",
+    age: null,
     sex: "",
     idType: "",
     govtId: "",
